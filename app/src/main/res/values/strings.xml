@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AppBd</string>
+    <string name="text_login">Login</string>
+    <string name="txt_botao_login">Login</string>
+    <string name="text_title_login">Faça o login</string>
+    <string name="text_users">Usuários</string>
+    <string name="text_list_users">Lista Usuários</string>
 </resources>
