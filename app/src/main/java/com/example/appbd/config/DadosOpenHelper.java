@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DadosOpenHelper extends SQLiteOpenHelper {
 
-    private static final int VERSION = 5; // versao do BD
+    private static final int VERSION = 6; // versao do BD
     private static String NM_BANCO = "banco";
     private Context context;
 
@@ -28,7 +28,9 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
             sqlUsuarios.append(" ( ");
             sqlUsuarios.append(" id INTEGER PRIMARY KEY AUTOINCREMENT, ");
             sqlUsuarios.append(" login VARCHAR(30) NOT NULL, ");
-            sqlUsuarios.append(" senha VARCHAR(100) NOT NULL ");
+            sqlUsuarios.append(" senha VARCHAR(100) NOT NULL, ");
+            sqlUsuarios.append(" email VARCHAR(100) NULL, ");
+            sqlUsuarios.append(" telefone VARCHAR(20) NULL ");
             sqlUsuarios.append(" ) ");
             db.execSQL(sqlUsuarios.toString());
 
@@ -47,9 +49,15 @@ public class DadosOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         try {
+            if(oldVersion == 5 && newVersion == 6) {
+                StringBuilder sqlUpdate = new StringBuilder();
+                sqlUpdate.append(" ALTER TABLE usuarios ADD COLUMN email VARCHAR(100) ");
+                db.execSQL(sqlUpdate.toString());
 
-            //CREATES AQUI DENTRO
-
+                sqlUpdate = new StringBuilder();
+                sqlUpdate.append(" ALTER TABLE usuarios ADD COLUMN telefone VARCHAR(20) ");
+                db.execSQL(sqlUpdate.toString());
+            }
         }catch (Exception ex){
 
         }

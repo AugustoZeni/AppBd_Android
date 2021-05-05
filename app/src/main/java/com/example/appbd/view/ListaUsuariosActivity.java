@@ -2,9 +2,12 @@ package com.example.appbd.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.appbd.R;
@@ -12,12 +15,14 @@ import com.example.appbd.adapters.UsuarioAdapter;
 import com.example.appbd.config.Globais;
 import com.example.appbd.controller.UsuarioController;
 import com.example.appbd.model.Usuario;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class ListaUsuariosActivity extends AppCompatActivity {
 
     ListView ltvUsuarios;
+    FloatingActionButton btnAddUsuario;
 
     Context context;
 
@@ -27,10 +32,18 @@ public class ListaUsuariosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_usuarios);
 
         ltvUsuarios = findViewById(R.id.ltvUsuarios_listaUsuarios);
+        btnAddUsuario = findViewById(R.id.btnAddUsuario_lista_usario);
 
         context = ListaUsuariosActivity.this;
 
         atualizarLista();
+
+        btnAddUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Globais.abrirActivity(context, UsuarioActivity.class, false);
+            }
+        });
     }
 
     private void atualizarLista(){

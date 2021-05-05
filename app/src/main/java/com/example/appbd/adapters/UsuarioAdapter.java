@@ -1,6 +1,7 @@
 package com.example.appbd.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.example.appbd.R;
 import com.example.appbd.config.Globais;
 import com.example.appbd.model.Usuario;
+import com.example.appbd.view.UsuarioActivity;
 
 import java.util.ArrayList;
 
@@ -40,6 +42,15 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
 
             id.setText(String.valueOf(objeto.getId()));
             login.setText(objeto.getLogin());
+
+            rowView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent tela = new Intent(context, UsuarioActivity.class);
+                    tela.putExtra("id", objeto.getId());
+                    context.startActivity(tela);
+                }
+            });
 
             return rowView;
 

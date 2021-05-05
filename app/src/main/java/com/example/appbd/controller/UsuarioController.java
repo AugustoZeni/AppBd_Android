@@ -1,5 +1,6 @@
 package com.example.appbd.controller;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,12 +43,98 @@ public class UsuarioController {
                 objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                 objeto.setLogin(resultado.getString(resultado.getColumnIndexOrThrow("login")));
                 objeto.setSenha(resultado.getString(resultado.getColumnIndexOrThrow("senha")));
+                objeto.setTelefone(resultado.getString(resultado.getColumnIndexOrThrow("telefone")));
+                objeto.setEmail(resultado.getString(resultado.getColumnIndexOrThrow("email")));
             }
             return objeto;
 
         }catch (Exception ex){
             Globais.exibirMensagem(context, ex.getMessage());
             return null;
+        }
+    }
+
+    public Usuario buscar(int id){
+        try {
+            Usuario objeto = null;
+
+            StringBuilder sql =new StringBuilder();
+            sql.append(" SELECT * FROM ");
+            sql.append(Tabelas.TB_USUARIOS);
+            sql.append(" WHERE id = '" + id + "'");
+
+            Cursor resultado = conexao.rawQuery(sql.toString(), null);
+
+            if (resultado.moveToNext()){
+                objeto = new Usuario();
+                objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
+                objeto.setLogin(resultado.getString(resultado.getColumnIndexOrThrow("login")));
+                objeto.setSenha(resultado.getString(resultado.getColumnIndexOrThrow("senha")));
+                objeto.setTelefone(resultado.getString(resultado.getColumnIndexOrThrow("telefone")));
+                objeto.setEmail(resultado.getString(resultado.getColumnIndexOrThrow("email")));
+            }
+            return objeto;
+
+        }catch (Exception ex){
+            Globais.exibirMensagem(context, ex.getMessage());
+            return null;
+        }
+    }
+
+    public boolean incluir(Usuario objeto){
+        try {
+
+            ContentValues valores = new ContentValues();
+            valores.put("login", objeto.getLogin());
+            valores.put("senha", objeto.getSenha());
+            valores.put("email", objeto.getEmail());
+            valores.put("telefone", objeto.getTelefone());
+
+            conexao.insertOrThrow(Tabelas.TB_USUARIOS, null, valores);
+
+            return true;
+
+        }catch (Exception ex){
+            Globais.exibirMensagem(context, ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean alterar(Usuario objeto){
+        try {
+
+            ContentValues valores = new ContentValues();
+            valores.put("login", objeto.getLogin());
+            valores.put("senha", objeto.getSenha());
+            valores.put("email", objeto.getEmail());
+            valores.put("telefone", objeto.getTelefone());
+
+            String[] paramentros = new String[1];
+            paramentros[0] = String.valueOf(objeto.getId());
+
+            conexao.update(Tabelas.TB_USUARIOS, valores, "id = ?", paramentros);
+
+            return true;
+
+        }catch (Exception ex){
+            Globais.exibirMensagem(context, ex.getMessage());
+            return false;
+        }
+    }
+
+    public boolean excluir(Usuario objeto){
+        try{
+
+            String[] paramentros = new String[1];
+            paramentros[0] = String.valueOf(objeto.getId());
+
+            conexao.delete(Tabelas.TB_USUARIOS, "id = ?", paramentros);
+
+            return true;
+
+        }catch (Exception ex){
+            Globais.exibirMensagem(context, ex.getMessage());
+            return false;
         }
     }
 
@@ -69,6 +156,8 @@ public class UsuarioController {
                     objeto = new Usuario();
                     objeto.setId(resultado.getInt(resultado.getColumnIndexOrThrow("id")));
                     objeto.setLogin(resultado.getString(resultado.getColumnIndexOrThrow("login")));
+                    objeto.setTelefone(resultado.getString(resultado.getColumnIndexOrThrow("telefone")));
+                    objeto.setEmail(resultado.getString(resultado.getColumnIndexOrThrow("email")));
 
                     listagem.add(objeto);
 
