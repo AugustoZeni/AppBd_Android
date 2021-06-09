@@ -19,17 +19,18 @@ import com.example.appbd.adapters.UsuarioAdapter;
 import com.example.appbd.config.Globais;
 import com.example.appbd.controller.UsuarioController;
 import com.example.appbd.model.Usuario;
-import com.github.rtoshiro.util.format.SimpleMaskFormatter;
-import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import java.util.ArrayList;
+
+import br.com.sapereaude.maskedEditText.MaskedEditText;
 
 public class UsuarioActivity extends AppCompatActivity {
 
     Context context;
     Usuario objeto;
     TextView lblId;
-    EditText txtLogin, txtEmail, txtTelefone, txtSenha;
+    EditText txtLogin, txtEmail, txtSenha;
+    MaskedEditText txtTelefone;
     UsuarioController usuarioController;
     Usuario objUsuario;
     Button btnExcluir;
@@ -47,10 +48,6 @@ public class UsuarioActivity extends AppCompatActivity {
         txtTelefone = findViewById(R.id.txtTelefone_usuario);
         btnExcluir = findViewById(R.id.btnExcluir_usuario);
         txtSenha = findViewById(R.id.txtSenha_usuario);
-
-        SimpleMaskFormatter smf = new SimpleMaskFormatter("(NN)NNNNN-NNNN");
-        MaskTextWatcher mtw = new MaskTextWatcher(txtTelefone, smf);
-        txtTelefone.addTextChangedListener(mtw);
 
         btnExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +100,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
                 objUsuario.setLogin(txtLogin.getText().toString());
                 objUsuario.setEmail(txtEmail.getText().toString());
-                objUsuario.setTelefone(txtTelefone.getText().toString());
+                objUsuario.setTelefone(txtTelefone.getRawText());
 
                 String senhaMd5 = Globais.md5(txtSenha.getText().toString());
                 objUsuario.setSenha(senhaMd5);

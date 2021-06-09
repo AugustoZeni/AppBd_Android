@@ -6,18 +6,39 @@
     android:padding="5dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/lblId_item_usuario"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Titulo"
-        android:text="ID" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lblLogin_item_usuario"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/lblId_item_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Titulo"
+            android:text="ID" />
+
+        <TextView
+            android:id="@+id/lblLogin_item_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Titulo"
+            android:text="LOGIN" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Titulo"
-        android:text="LOGIN" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lblTelefone_item_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Titulo"
+            android:text="TELEFONE" />
+
+    </LinearLayout>
 
 </LinearLayout>

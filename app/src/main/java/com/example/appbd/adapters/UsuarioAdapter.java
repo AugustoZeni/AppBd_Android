@@ -37,11 +37,13 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
 
             View rowView = inflater.inflate(R.layout.item_lista_usuario, parent, false);
 
-            TextView id = (TextView) rowView.findViewById(R.id.lblId_item_usuario);
-            TextView login = (TextView) rowView.findViewById(R.id.lblLogin_item_usuario);
+            TextView id = rowView.findViewById(R.id.lblId_item_usuario);
+            TextView login = rowView.findViewById(R.id.lblLogin_item_usuario);
+            TextView telefone = rowView.findViewById(R.id.lblTelefone_item_usuario);
 
             id.setText(String.valueOf(objeto.getId()));
             login.setText(objeto.getLogin());
+            telefone.setText(objeto.getTelefone());
 
             rowView.setOnClickListener(new View.OnClickListener() {
                 @Override

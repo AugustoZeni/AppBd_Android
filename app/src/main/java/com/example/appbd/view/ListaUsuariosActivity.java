@@ -36,14 +36,18 @@ public class ListaUsuariosActivity extends AppCompatActivity {
 
         context = ListaUsuariosActivity.this;
 
-        atualizarLista();
-
         btnAddUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Globais.abrirActivity(context, UsuarioActivity.class, false);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        atualizarLista();
     }
 
     private void atualizarLista(){

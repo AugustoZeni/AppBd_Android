@@ -56,11 +56,13 @@
         style="@style/LabelBold"
         android:text="@string/telefone_text"/>
 
-    <EditText
+    <br.com.sapereaude.maskedEditText.MaskedEditText
         android:id="@+id/txtTelefone_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="phone" />
+        android:inputType="phone"
+        app:allowed_chars="1234567890"
+        app:mask="(##) #####-####" />
 
     <Button
         android:id="@+id/btnExcluir_usuario"
